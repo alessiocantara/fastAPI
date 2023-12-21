@@ -26,13 +26,13 @@ def calculate_phi_psi_angles(structure):
     return phi_angles, psi_angles
 
 
-def plot_ramachandran(structure, pdb_file_path):
+def ramachandran_plot(structure, pdb_file_path):
     phi_angles, psi_angles = calculate_phi_psi_angles(structure)
 
     source = ColumnDataSource(data=dict(phi=phi_angles, psi=psi_angles))
 
     plot = figure(
-        title=f'Ramachandran Plot of {pdb_file_path}', width=800, height=600)
+        title=f'Ramachandran Plot of {pdb_file_path}', width=800)
     plot.output_backend = "svg"
 
     # Draw dividing lines

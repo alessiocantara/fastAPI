@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from Bio import PDB
 
-from plots import plot_ramachandran
+from plots.ramachandran import ramachandran_plot
 
 app = FastAPI(
     title="Ramachandran Plot API",
@@ -44,4 +44,4 @@ async def calculate_ramachandran(pdb_id: str):
     parser = PDB.PDBParser(QUIET=True)
     structure = parser.get_structure("protein", io.StringIO(pdb_file))
 
-    return plot_ramachandran(structure, pdb_id)
+    return ramachandran_plot(structure, pdb_id)
