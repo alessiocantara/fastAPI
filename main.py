@@ -34,8 +34,15 @@ def fetch_pdb_file(pdb_id):
         return None
 
 
-@app.get("/calculate_ramachandran/{pdb_id}", response_class=HTMLResponse)
-async def calculate_ramachandran(pdb_id: str):
+@app.get("/plots")
+def plot_list():
+    plots = [{"path": route.path, "name": route.name}
+             for route in app.routes if "/plots/" in route.path]
+    return plots
+
+
+@app.get("/plots/ramachandran/{pdb_id}", response_class=HTMLResponse)
+async def ramachandran(pdb_id: str):
     pdb_file = fetch_pdb_file(pdb_id)
 
     if pdb_file is None:
